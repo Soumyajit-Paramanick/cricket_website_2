@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Carousel } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import API from '../config'; // ✅ Imported centralized config
 const Home = () => {
   const [products, setProducts] = useState([]);
   
@@ -14,7 +14,8 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/products/?limit=12')
+    // ✅ Used config variable here
+    axios.get(`${API.PRODUCTS}?limit=12`)
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);

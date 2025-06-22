@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Card, Carousel, Badge } from 'react-bootstrap';
 import axios from 'axios';
-
+import API from '../config'; // ✅ Imported centralized config
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/products/${id}/`)
+    axios.get(API.PRODUCT_DETAIL(id))
       .then(response => setProduct(response.data))
       .catch(error => console.error('Error fetching product:', error));
   }, [id]);

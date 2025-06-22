@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Alert, Container } from 'react-bootstrap';
 import axios from 'axios';
-
+import API from '../config'; // ✅ Imported centralized config
 const PromotionalBanner = () => {
   const [banner, setBanner] = useState(null);
   const [show, setShow] = useState(false);
@@ -9,7 +9,7 @@ const PromotionalBanner = () => {
 
   // Load banner from API
   useEffect(() => {
-    axios.get('http://localhost:8000/api/promotional-banners/')
+    axios.get(API.BANNERS)
       .then(response => {
         if (response.data.length > 0) {
           console.log("🎯 Banner loaded:", response.data[0]);
@@ -59,86 +59,3 @@ const PromotionalBanner = () => {
 };
 
 export default PromotionalBanner;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { useState, useEffect } from 'react';
-// import { Alert, Container } from 'react-bootstrap';
-// import axios from 'axios';
-
-// const PromotionalBanner = () => {
-//   const [banner, setBanner] = useState(null);
-//   const [show, setShow] = useState(false);
-//   const [timerDone, setTimerDone] = useState(false);
-
-//   // Load banner data from API
-//   useEffect(() => {
-//     axios.get('http://localhost:8000/api/promotional-banners/')
-//       .then(response => {
-//         if (response.data.length > 0) {
-//           setBanner(response.data[0]);
-//         }
-//       })
-//       .catch(error => console.error('Error fetching banner:', error));
-//   }, []);
-
-//   // Show banner after 15 seconds
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       setTimerDone(true);
-//     }, 15000); // 15 seconds
-
-//     return () => clearTimeout(timer);
-//   }, []);
-
-//   // Only show if banner exists, timer is done, and not dismissed
-//   if (!banner || !timerDone || !show) return null;
-
-//   return (
-//     <Container fluid className="px-0 fixed-top" style={{ top: '56px', zIndex: 1030 }}>
-//       <Alert 
-//         variant="danger" 
-//         className="rounded-0 text-center mb-0 py-2"
-//         onClose={() => setShow(false)} 
-//         dismissible
-//         transition
-//       >
-//         <h5 className="mb-0">
-//           🎉 {banner.message} 🎉
-//           <small className="ms-2">(Limited Time Offer!)</small>
-//         </h5>
-//       </Alert>
-//     </Container>
-//   );
-// };
-
-// export default PromotionalBanner;

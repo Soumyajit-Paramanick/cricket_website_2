@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import API from '../config'; // ✅ Imported centralized config
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -14,13 +14,13 @@ const Products = () => {
   });
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/categories/')
+    axios.get(API.CATEGORIES)
       .then(response => setCategories(response.data))
       .catch(error => console.error('Error fetching categories:', error));
   }, []);
 
   useEffect(() => {
-    let url = 'http://localhost:8000/api/products/';
+    let url = API.PRODUCTS;
     const params = new URLSearchParams();
     
     if (filters.category) params.append('category', filters.category);

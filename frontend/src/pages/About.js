@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import axios from 'axios';
-
+import API from '../config'; // ✅ Imported centralized config
 const About = () => {
   const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/gallery-images/')
+    axios.get(API.GALLERY)
       .then(response => setGallery(response.data))
       .catch(error => console.error('Error fetching gallery:', error));
   }, []);
@@ -85,72 +85,3 @@ export default About;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Container } from 'react-bootstrap';
-
-// const About = () => {
-//   return (
-//     <Container className="my-4">
-//       <h1>About Us</h1>
-//       <p>
-//         Welcome to Cricket Shop, your premier destination for all cricket equipment since 2010.
-//       </p>
-//       <p>
-//         We take pride in providing high-quality cricket gear to players of all levels, 
-//         from beginners to professionals. Our shop has been recognized as the "Best Cricket 
-//         Retailer" for three consecutive years by the Cricket Association.
-//       </p>
-//       <p>
-//         Our mission is to support the growth of cricket by offering the best equipment 
-//         at competitive prices with exceptional customer service.
-//       </p>
-//     </Container>
-//   );
-// };
-
-// export default About;
